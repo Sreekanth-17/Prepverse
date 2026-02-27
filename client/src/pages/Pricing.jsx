@@ -3,7 +3,6 @@ import { FaArrowLeft, FaCheckCircle } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { motion } from "motion/react";
 import axios from 'axios';
-import { ServerUrl } from '../App';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
 function Pricing() {
@@ -66,7 +65,7 @@ function Pricing() {
       plan.id === "basic" ? 100 :
       plan.id === "pro" ? 500 : 0;
 
-      const result = await axios.post(ServerUrl + "/api/payment/order" , {
+      const result = await axios.post( "https://prepverse-4tn1.onrender.com/api/payment/order" , {
         planId: plan.id,
         amount: amount,
         credits: plan.credits,
@@ -82,7 +81,7 @@ function Pricing() {
       order_id: result.data.id,
 
       handler:async function (response) {
-        const verifypay = await axios.post(ServerUrl + "/api/payment/verify" ,response , {withCredentials:true})
+        const verifypay = await axios.post("https://prepverse-4tn1.onrender.com/api/payment/verify" ,response , {withCredentials:true})
         dispatch(setUserData(verifypay.data.user))
 
           alert("Payment Successful 🎉 Credits Added!");

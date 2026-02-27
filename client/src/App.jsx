@@ -19,7 +19,7 @@ function App() {
   useEffect(()=>{
     const getUser = async () => {
       try {
-        const result = await axios.get(ServerUrl + "/api/user/current-user", {withCredentials:true})
+        const result = await axios.get("https://prepverse-4tn1.onrender.com/api/user/current-user", {withCredentials:true})
         dispatch(setUserData(result.data))
       } catch (error) {
         console.log(error)
